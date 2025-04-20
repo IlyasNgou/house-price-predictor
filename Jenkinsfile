@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Clone Repo') {
             steps {
-                git 'https://github.com/YOUR_USERNAME/house-price-predictor.git'
+                git 'https://github.com/IlyasNgou/house-price-predictor.git'
             }
         }
 

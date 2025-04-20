@@ -3,7 +3,7 @@ import numpy as np
 from sklearn.model_selection import train_test_split, GridSearchCV
 from sklearn.pipeline import Pipeline
 from sklearn.compose import ColumnTransformer
-from xgboost import XGBRegressor
+from sklearn.ensemble import RandomForestRegressor
 from sklearn.preprocessing import OneHotEncoder, FunctionTransformer
 from sklearn.metrics import mean_absolute_error
 import joblib
@@ -28,8 +28,9 @@ preprocessor = ColumnTransformer(transformers=[
 # Build pipeline
 pipeline = Pipeline(steps=[
     ('preprocessing', preprocessor),
-    ('model', XGBRegressor(n_estimators=200, learning_rate=0.1, max_depth=4, random_state=42))
+    ('model', RandomForestRegressor(n_estimators=100, max_depth=10, random_state=42))
 ])
+
 
 # Split data
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
