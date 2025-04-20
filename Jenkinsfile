@@ -2,9 +2,9 @@ pipeline {
     agent any
 
     stages {
-        stage('Clone Repo') {
+        stage('Checkout Code') {
             steps {
-                git 'https://github.com/IlyasNgou/house-price-predictor.git'
+                checkout scm
             }
         }
 
