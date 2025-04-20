@@ -28,8 +28,9 @@ pipeline {
 
         stage('Deploy') {
             steps {
-                bat 'nohup python app/app.py &'
+                bat 'start "" /B python app/app.py'
             }
         }
+
     }
 }
