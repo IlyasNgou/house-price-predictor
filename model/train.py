@@ -9,7 +9,7 @@ from sklearn.metrics import mean_absolute_error
 import joblib
 data=pd.read_csv('C:/Users/hp/Desktop/house-price-predictor/data/Housing.csv', sep=',')
 X = data.drop("price", axis=1)
-y = np.log1p(data["price"])  # log(1 + price) transformation for better modeling
+y = np.log1p(data["price"])  
 
 # Define categorical and numerical features
 categorical_features = [
