@@ -17,19 +17,19 @@ pipeline {
         
         stage('Run Tests') {
             steps {
-                bat 'venv\Scripts\activate && pytest tests'
+                bat 'venv\\Scripts\\activate && pytest tests/'
             }
         }
 
         stage('Train Model') {
             steps {
-                bat 'venv\Scripts\activate && python model/train.py'
+                bat 'venv\\Scripts\\activate && python model/train.py'
             }
         }
 
         stage('Deploy') {
             steps {
-                bat 'venv\Scripts\activate && start "" /B python app/app.py'
+                bat 'venv\\Scripts\\activate && start "" /B python app/app.py'
             }
         }
 
