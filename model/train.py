@@ -45,4 +45,3 @@ true_values = np.expm1(y_test)
 
 mae = mean_absolute_error(true_values, y_pred)
 joblib.dump(pipeline, 'model/model.pkl')
-print(f"✅ MAE: {mae:.2f}")

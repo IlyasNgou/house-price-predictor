@@ -14,7 +14,7 @@ pipeline {
                 bat 'venv\\Scripts\\activate && pip install -r requirements.txt'
             }
         }
-
+        
         stage('Run Tests') {
             steps {
                 bat 'venv\\Scripts\\activate && pytest tests/'
