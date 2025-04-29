@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: home_prediction_app
+    ports:
+      - "5000:5000"
+    restart: always
+
+  nginx:
+    build:
+      context: ./nginx
+    container_name: nginx_reverse_proxy
+    ports:
+      - "80:80"
+    depends_on:
+      - web

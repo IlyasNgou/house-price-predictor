@@ -8,29 +8,42 @@ pipeline {
             }
         }
 
-        stage('Install Dependencies') {
+        stage('Setup venv & Install Dependencies') {
             steps {
-                bat 'pip install -r requirements.txt'
+                bat 'python -m venv venv'
+                bat 'venv\\Scripts\\activate && pip install -r requirements.txt'
             }
         }
 
         stage('Run Tests') {
             steps {
-                bat 'pytest tests/'
+                bat 'venv\\Scripts\\activate && pytest tests/'
             }
         }
 
-        stage('Train Model') {
+        stage('Trivy Scan') {
             steps {
-                bat 'python model/train.py'
+                bat 'trivy fs --exit-code 1 --severity HIGH,CRITICAL .'
             }
         }
 
-        stage('Deploy') {
+        stage('Build Docker Image') {
             steps {
-                bat 'start "" /B python app/app.py'
+                bat 'docker build -t home-prediction-app .'
             }
         }
 
+        stage('Docker Compose Up') {
+            steps {
+                bat 'docker-compose up --build -d'
+            }
+        }
+
+        stage('Ansible Deploy') {
+            steps {
+                bat 'docker build -t ansible-runner ./ansible'
+                bat 'docker run --rm -v %cd%:/ansible ansible-runner deploy.yml'
+            }
+        }
     }
 }

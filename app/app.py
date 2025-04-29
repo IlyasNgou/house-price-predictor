@@ -26,3 +26,6 @@ def predict():
         prediction = model.predict(df)
         return f"<h2>Predicted Price: {round(prediction[0]):,} MAD</h2>"
     return render_template('index.html')
+
+if __name__ == "__main__":
+    app.run(debug=True)

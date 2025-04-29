@@ -1,0 +1,6 @@
+- name: Deploy home prediction app
+  hosts: localhost
+  connection: local
+  tasks:
+    - name: Build and run Docker Compose
+      shell: docker-compose up --build -d
